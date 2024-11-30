@@ -31,7 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
         outputElement.textContent = `Translated: ${selectedText} (mock output)`;
         break;
       case "summarize":
-        outputElement.textContent = `Summary: ${selectedText} (mock output)`;
+        generateSummary(selectedText).then((summarizedText) => {
+          console.log(summarizedText);
+          outputElement.textContent = summarizedText;
+        })
         break;
     }
   };
@@ -47,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("summarize")
     .addEventListener("click", () => performAction("summarize"));
 });
+
 
 // init the prompt api session
 var promptApiSession;
@@ -90,4 +94,56 @@ async function reset() {
       promptApiSession.destroy();
     }
     promptApiSession = null;
+}
+
+// generates summary
+async function generateSummary(text) {
+  try {
+    const session = await createSummarizer(
+      {
+        type: "key-points",
+        format: "markdown",
+        length: "medium"
+      },
+      (message, progress) => {
+        console.log(`${message} (${progress.loaded}/${progress.total})`);
+      }
+    );
+
+    console.log("Proceeding to summarize text...");
+
+    const summary = await session.summarize(text);
+    session.destroy();
+    
+    return summary;
+  } catch (e) {
+    console.log('Summary generation failed');
+    console.error(e);
+    return 'Error: ' + e.message;
+  }
+}
+
+// creates gemini summarizer
+async function createSummarizer(config, downloadProgressCallback) {
+  if (!window.ai || !window.ai.summarizer) {
+    throw new Error('AI Summarization is not supported in this browser');
+  }
+  const canSummarize = await window.ai.summarizer.capabilities();
+  if (canSummarize.available === 'no') {
+    throw new Error('AI Summarization is not supported');
+  }
+  const summarizationSession = await self.ai.summarizer.create(
+    config,
+    downloadProgressCallback
+  );
+  if (canSummarize.available === 'after-download') {
+    summarizationSession.addEventListener(
+      'downloadprogress',
+      downloadProgressCallback
+    );
+    await summarizationSession.ready;
+  }
+
+  console.log("Summarizer created successfully...");
+  return summarizationSession;
 }
