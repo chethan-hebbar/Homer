@@ -3,7 +3,14 @@
   "name": "Text Actions",
   "version": "1.0",
   "description": "Perform actions like Rewrite, Translate, Summarize on selected text.",
-  "permissions": ["contextMenus", "scripting", "activeTab", "storage"],
+  "permissions": ["contextMenus", "scripting", "activeTab", "storage", "aiLanguageModelOriginTrial"],
+  "trial_tokens": [
+    "AtSP8FjUJX/qQfCzaVd+K3BuebR0+c/MHAdBWwSsamR66j1VAopN8PPaOLoqn0YmF/+4Pax1kNCNmXwRjGaDnQwAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vZ2RjYmlhZWVhZmprZ21ocG5nbGhmcGpwYW1vZ2Zna2oiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9",
+    "AgSw2AO2fN5ekN3glMMWpcjetbeHzoxdgr10L10AtLDvuUsveOTfQOEbI7cTg2sOd9cek1jCdUMyoA+Crsn3BwAAAABzeyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vZ2RjYmlhZWVhZmprZ21ocG5nbGhmcGpwYW1vZ2Zna2oiLCJmZWF0dXJlIjoiQUlTdW1tYXJpemF0aW9uQVBJIiwiZXhwaXJ5IjoxNzUzMTQyNDAwfQ==",
+    "Avy5xaKE1Au6piTghJF2i1pOvKxE5W9bvcV0H4RDeT7+bnHQnBsD+BEso2NL9aC61gNYnjmApkwXhO143Jy7dQQAAAB1eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vZ2RjYmlhZWVhZmprZ21ocG5nbGhmcGpwYW1vZ2Zna2oiLCJmZWF0dXJlIjoiTGFuZ3VhZ2VEZXRlY3Rpb25BUEkiLCJleHBpcnkiOjE3NDk1OTk5OTl9",
+    "AnwEYiu64hHhjmB1SctnyYEu8HakEuXGqa6j8UCjitRHiHZGCnwVMCu6rOxgx1rBr+tBTfSBPMRkfVq1UusP7gIAAABveyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vZ2RjYmlhZWVhZmprZ21ocG5nbGhmcGpwYW1vZ2Zna2oiLCJmZWF0dXJlIjoiVHJhbnNsYXRpb25BUEkiLCJleHBpcnkiOjE3NTMxNDI0MDB9"
+  ],
+  "minimum_chrome_version": "131",
   "background": {
     "service_worker": "background.js"
   },
