@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Text Actions",
+  "version": "1.0",
+  "description": "Perform actions like Rewrite, Translate, Summarize on selected text.",
+  "permissions": ["contextMenus", "scripting", "activeTab", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
