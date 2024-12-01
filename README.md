@@ -38,7 +38,7 @@ If you encounter issues accessing `window.ai` or missing "Optimization Guide On 
 
 ## Running this extension
 
-1. Clone this repository\
+1. Clone this repository.
 2. Make sure get your own trial tokens by following this [documentation](https://developer.chrome.com/docs/ai/built-in-apis)
 3. Update the obatined trial_tokens in [manifest.json](https://github.com/chethan-hebbar/Homer/blob/main/manifest.json)
 4. Load the cloned project directory in Chrome as an [unpacked extension](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked).
