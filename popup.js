@@ -191,3 +191,27 @@ async function createLanguageDetector(){
 
   return detector;
 }
+
+// translate text
+async function translateText(selectedText, inputLanguage){
+  if (!('translation' in self && 'createTranslator' in self.translation)) {
+    // The Translator API is not supported.
+    throw new Error("Translate capability not available...");
+  }
+
+  try{
+    console.log("Creating translator...");
+    const translator = await self.translation.createTranslator({
+      sourceLanguage: inputLanguage,
+      targetLanguage: 'en',
+    });
+
+    console.log("Proceeding to translate given text...");
+    return await translator.translate('Where is the next bus stop, please?');
+  }
+
+  catch(e){
+    console.log("Error during creation of translator or during translation of text", e);
+    throw e;
+  }
+}
