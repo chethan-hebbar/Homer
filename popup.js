@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   chrome.storage.local.get("selectedText", (data) => {
     if (data.selectedText) {
       textElement.textContent = data.selectedText;
+      // add code to display detected language using the detector
     } else {
       textElement.textContent = "No text selected.";
     }
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         break;
       case "translate":
+        // add code to detect language and then translate it to english
         console.log("Translating...")
         outputElement.textContent = `Translated: ${selectedText} (mock output)`;
         break;
@@ -146,4 +148,46 @@ async function createSummarizer(config, downloadProgressCallback) {
 
   console.log("Summarizer created successfully...");
   return summarizationSession;
+}
+
+// language detector
+var languageDetector;
+
+// perform language detection
+async function detectLanguage(selectedText){
+  if(!detector){
+    detector = await createLanguageDetector();
+  }
+
+  const detectorResult = await detector.detect(selectedText);
+
+  return detectorResult.detectedLanguage;
+}
+
+// create language detector session
+async function createLanguageDetector(){
+  if (!('translation' in self && 'canDetect' in self.translation)) {
+    // The Language Detector API is not available
+    throw new Error("Language Detecting capabilities absent...");
+  }
+  
+  const canDetect = await translation.canDetect();
+  if (canDetect === 'no') {
+    // The language detector isn't usable.
+    throw new Error("Language Detector unavailable at the moment...");
+  }
+  if (canDetect === 'readily') {
+    // The language detector can immediately be used.
+    detector = await translation.createDetector();
+  } 
+  else {
+    // The language detector can be used after model download.
+    detector = await translation.createDetector();
+    detector.addEventListener('downloadprogress', (e) => {
+      console.log(e.loaded, e.total);
+      });
+    await detector.ready;
+  }
+
+  return detector;
 }
