@@ -1,7 +1,7 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "logSelectedText",
-    title: "Show Selected Text in Popup",
+    title: "Homer - AI actions for this text",
     contexts: ["selection"],
   });
 });

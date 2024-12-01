@@ -3,17 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Text Actions</title>
+    <title>Homer</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h3>Selected Text:</h3>
+    <h3 class="selectedTextHeader">Selected Text:</h3>
     <div id="text">No text selected</div>
-    <h3>Actions:</h3>
+    <h2>What would you like to do with your selected text?</h1>
     <div class="actions">
       <button id="rewrite">Rewrite</button>
-      <button id="translate">Translate</button>
       <button id="summarize">Summarize</button>
+      <button id="translateToZh">Translate to ZH</button>
+      <button id="translateToJa">Translate to JA</button>
+      <button id="translateToEs">Translate to ES</button>
     </div>
     <div id="output">Action output will appear here.</div>
     <script src="popup.js"></script>
